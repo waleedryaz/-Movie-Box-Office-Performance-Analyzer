@@ -1326,9 +1326,6 @@ elif page == "🔮 AI Predictions":
         This means the actual value is likely to be within ±{mae_test:.2f} of the predicted value.
         """)
 
-# ============================================================================
-# ABOUT PROJECT
-# ============================================================================
 
 elif page == "ℹ️ About Project":
     st.markdown("# ℹ️ Project Information")
@@ -1421,15 +1418,15 @@ elif page == "ℹ️ About Project":
     
     ## 👥 Development Team
     
-    **Team Name:** [Your Team Name]
+    **Team Name:** [Data Detectives]
     
-    | # | Roll Number | Name | Department | Section |
-    |---|-------------|------|------------|---------|
-    | 1 | [Roll #] | [Student Name] | Computer Science | [Section] |
-    | 2 | [Roll #] | [Student Name] | Computer Science | [Section] |
-    | 3 | [Roll #] | [Student Name] | Computer Science | [Section] |
-    | 4 | [Roll #] | [Student Name] | [Department] | [Section] |
-    | 5 | [Roll #] | [Student Name] | [Department] | [Section] |
+    | # | Roll Number |       Name                  | Department          | Section |
+    |---|-------------|---------------------------------------------------------------  
+    | 1 | [24F-0731]  |      [Muhammad Waleed]      | Computer Science    | BSCS-4D |
+    | 2 | [24F-0717]  |      [Muhammad Mughees]     | Computer Science    | BSCS-4D |
+    | 3 | [24F-0552]  |      [Faraz Ahmed]          | Computer Science    | BSCS-4D |
+    | 4 | [24F-3050]  |      [Ibadat Ali]           | Software Engineering| BSSE-4A |
+    | 5 | [24F-3113]  |      [Muhammad Adil]        | Software Engineering| BSSE-4B |
     
     ## 📅 Project Details
     
@@ -1462,7 +1459,7 @@ elif page == "ℹ️ About Project":
     
     ## 🔗 Resources
     
-    - [Project GitHub Repository](#)
+    - [Project GitHub Repository](https://github.com/waleedryaz/-Movie-Box-Office-Performance-Analyzer)
     - [Dataset Source](https://www.kaggle.com/datasets/writuparnabanerjee/hollywood-movies)
     - [Streamlit Documentation](https://docs.streamlit.io)
     - [Pandas Documentation](https://pandas.pydata.org)
