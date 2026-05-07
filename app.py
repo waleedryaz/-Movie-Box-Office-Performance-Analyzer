@@ -1420,8 +1420,9 @@ elif page == "ℹ️ About Project":
     
     **Team Name:** [Data Detectives]
     
-  st.markdown("""
-
+  st.markdown
+  ("""
+("""
 **Team Name:** Data Detectives
 
 | No | Roll Number | Name | Department | Section |
