@@ -1420,13 +1420,19 @@ elif page == "ℹ️ About Project":
     
     **Team Name:** [Data Detectives]
     
-    | # | Roll Number |       Name                  | Department          | Section |
-    |---|-------------|---------------------------------------------------------------  
-    | 1 | [24F-0731]  |      [Muhammad Waleed]      | Computer Science    | BSCS-4D |
-    | 2 | [24F-0717]  |      [Muhammad Mughees]     | Computer Science    | BSCS-4D |
-    | 3 | [24F-0552]  |      [Faraz Ahmed]          | Computer Science    | BSCS-4D |
-    | 4 | [24F-3050]  |      [Ibadat Ali]           | Software Engineering| BSSE-4A |
-    | 5 | [24F-3113]  |      [Muhammad Adil]        | Software Engineering| BSSE-4B |
+  st.markdown("""
+## 👥 Development Team
+
+**Team Name:** Data Detectives
+
+| # | Roll Number | Name | Department | Section |
+|---|-------------|------|------------|---------|
+| 1 | 24F-0731 | Muhammad Waleed | Computer Science | BSCS-4D |
+| 2 | 24F-0717 | Muhammad Mughees | Computer Science | BSCS-4D |
+| 3 | 24F-0552 | Faraz Ahmed | Computer Science | BSCS-4D |
+| 4 | 24F-3050 | Ibadat Ali | Software Engineering | BSSE-4A |
+| 5 | 24F-3113 | Muhammad Adil | Software Engineering | BSSE-4B |
+""")
     
     ## 📅 Project Details
     
