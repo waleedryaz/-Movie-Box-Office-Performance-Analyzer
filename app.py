@@ -1651,8 +1651,8 @@ elif page == "ℹ️ About Project":
     ---
     
     <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 10px; margin-top: 30px; border: 2px solid rgba(102, 126, 234, 0.3);'>
-        <p style='color: white; font-size: 16px; margin: 0; font-weight: 600;'>Made with ❤️ using Python & Streamlit</p>
-        <p style='color: rgba(255,255,255,0.7); font-size: 12px; margin: 10px 0 0 0;'>© 2026 Data Detectives - FAST NUCES Karachi</p>
+        <p style='color: white; font-size: 16px; margin: 0; font-weight: 600;'>Made with Python & Streamlit</p>
+        <p style='color: rgba(255,255,255,0.7); font-size: 12px; margin: 10px 0 0 0;'>© 2026 Data Detectives - FAST NUCES </p>
     </div>
     """, unsafe_allow_html=True)
 
