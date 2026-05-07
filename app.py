@@ -1421,11 +1421,10 @@ elif page == "ℹ️ About Project":
     **Team Name:** [Data Detectives]
     
   st.markdown("""
-## 👥 Development Team
 
 **Team Name:** Data Detectives
 
-| # | Roll Number | Name | Department | Section |
+| No | Roll Number | Name | Department | Section |
 |---|-------------|------|------------|---------|
 | 1 | 24F-0731 | Muhammad Waleed | Computer Science | BSCS-4D |
 | 2 | 24F-0717 | Muhammad Mughees | Computer Science | BSCS-4D |
