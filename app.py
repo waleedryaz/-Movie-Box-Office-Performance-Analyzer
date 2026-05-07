@@ -19,100 +19,93 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* Main background - Black with gold accent */
+    /* Main background - Dark red to black */
     .main {
-        background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2d2d2d 100%);
+        background: linear-gradient(135deg, #1a0000 0%, #330000 30%, #4d0000 100%);
     }
     
-    /* Sidebar - Dark with gold trim */
+    /* Sidebar - Deep red */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
-        border-right: 3px solid #FFD700;
+        background: linear-gradient(180deg, #0d0000 0%, #1a0000 100%);
+        border-right: 3px solid #ff4444;
     }
     
-    /* Metrics */
+    /* Metrics - Bright red */
     [data-testid="stMetricValue"] {
         font-size: 28px;
         font-weight: 700;
-        color: #FFD700;
-        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        color: #ff4444;
+        text-shadow: 0 0 20px rgba(255, 68, 68, 0.6);
     }
     
     [data-testid="stMetricLabel"] {
-        color: #b8b8b8;
+        color: #cc9999;
         font-weight: 600;
     }
     
-    /* Headers with golden glow */
+    /* Headers - Fire gradient */
     h1 {
-        color: #FFD700 !important;
+        background: linear-gradient(90deg, #ff4444 0%, #ff6b35 50%, #ffa500 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         font-weight: 800 !important;
-        text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        filter: drop-shadow(0 0 25px rgba(255, 68, 68, 0.4));
     }
     
     h2, h3 {
-        color: #FFA500 !important;
+        color: #ff6b35 !important;
         font-weight: 700 !important;
-        text-shadow: 0 0 10px rgba(255, 165, 0, 0.2);
+        text-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
     }
     
-    /* Tabs - Golden accent */
+    /* Tabs - Fiery theme */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
-        background-color: rgba(0, 0, 0, 0.5);
+        background: linear-gradient(135deg, rgba(26, 0, 0, 0.8) 0%, rgba(51, 0, 0, 0.8) 100%);
         border-radius: 15px;
         padding: 8px;
-        border: 2px solid rgba(255, 215, 0, 0.3);
+        border: 2px solid rgba(255, 68, 68, 0.3);
     }
     
     .stTabs [data-baseweb="tab"] {
-        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+        background: linear-gradient(135deg, rgba(255, 68, 68, 0.15) 0%, rgba(255, 107, 53, 0.15) 100%);
         border-radius: 10px;
-        color: #FFD700;
+        color: #ff6b35;
         padding: 12px 24px;
         font-weight: 600;
-        border: 1px solid rgba(255, 215, 0, 0.3);
-        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 68, 68, 0.3);
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-        color: #000000;
-        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        background: linear-gradient(135deg, #ff4444 0%, #ff6b35 50%, #ffa500 100%);
+        color: #ffffff;
+        box-shadow: 0 4px 20px rgba(255, 68, 68, 0.5);
     }
     
-    /* Buttons - Premium gold */
+    /* Buttons - Fire gradient */
     .stButton>button {
-        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-        color: #000000;
+        background: linear-gradient(135deg, #ff4444 0%, #ff6b35 50%, #ffa500 100%);
+        color: #ffffff;
         border: none;
         border-radius: 12px;
         padding: 12px 28px;
         font-weight: 700;
-        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(255, 68, 68, 0.4);
     }
     
     .stButton>button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+        box-shadow: 0 6px 30px rgba(255, 68, 68, 0.6);
     }
     
-    /* Metric cards - Black with gold border */
+    /* Metric cards - Dark red with fire border */
     .metric-card {
-        background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+        background: linear-gradient(135deg, #1a0000 0%, #330000 100%);
         padding: 25px;
         border-radius: 15px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
         text-align: center;
-        border: 2px solid #FFD700;
-    }
-    
-    /* Info/Success boxes */
-    .stAlert {
-        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
-        border-left: 4px solid #FFD700;
-        border-radius: 10px;
+        border: 2px solid #ff4444;
     }
 </style>
 """, unsafe_allow_html=True)
