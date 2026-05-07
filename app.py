@@ -17,96 +17,18 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Beautiful CSS
 st.markdown("""
 <style>
-    /* Main background - Dark red to black */
-    .main {
-        background: linear-gradient(135deg, #1a0000 0%, #330000 30%, #4d0000 100%);
-    }
-    
-    /* Sidebar - Deep red */
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0d0000 0%, #1a0000 100%);
-        border-right: 3px solid #ff4444;
-    }
-    
-    /* Metrics - Bright red */
-    [data-testid="stMetricValue"] {
-        font-size: 28px;
-        font-weight: 700;
-        color: #ff4444;
-        text-shadow: 0 0 20px rgba(255, 68, 68, 0.6);
-    }
-    
-    [data-testid="stMetricLabel"] {
-        color: #cc9999;
-        font-weight: 600;
-    }
-    
-    /* Headers - Fire gradient */
-    h1 {
-        background: linear-gradient(90deg, #ff4444 0%, #ff6b35 50%, #ffa500 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-weight: 800 !important;
-        filter: drop-shadow(0 0 25px rgba(255, 68, 68, 0.4));
-    }
-    
-    h2, h3 {
-        color: #ff6b35 !important;
-        font-weight: 700 !important;
-        text-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
-    }
-    
-    /* Tabs - Fiery theme */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 8px;
-        background: linear-gradient(135deg, rgba(26, 0, 0, 0.8) 0%, rgba(51, 0, 0, 0.8) 100%);
-        border-radius: 15px;
-        padding: 8px;
-        border: 2px solid rgba(255, 68, 68, 0.3);
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        background: linear-gradient(135deg, rgba(255, 68, 68, 0.15) 0%, rgba(255, 107, 53, 0.15) 100%);
-        border-radius: 10px;
-        color: #ff6b35;
-        padding: 12px 24px;
-        font-weight: 600;
-        border: 1px solid rgba(255, 68, 68, 0.3);
-    }
-    
-    .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #ff4444 0%, #ff6b35 50%, #ffa500 100%);
-        color: #ffffff;
-        box-shadow: 0 4px 20px rgba(255, 68, 68, 0.5);
-    }
-    
-    /* Buttons - Fire gradient */
-    .stButton>button {
-        background: linear-gradient(135deg, #ff4444 0%, #ff6b35 50%, #ffa500 100%);
-        color: #ffffff;
-        border: none;
-        border-radius: 12px;
-        padding: 12px 28px;
-        font-weight: 700;
-        box-shadow: 0 4px 20px rgba(255, 68, 68, 0.4);
-    }
-    
-    .stButton>button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 30px rgba(255, 68, 68, 0.6);
-    }
-    
-    /* Metric cards - Dark red with fire border */
-    .metric-card {
-        background: linear-gradient(135deg, #1a0000 0%, #330000 100%);
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-        text-align: center;
-        border: 2px solid #ff4444;
-    }
+    .main {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);}
+    [data-testid="stSidebar"] {background: linear-gradient(180deg, #1e1e2e 0%, #2d2d44 100%);}
+    [data-testid="stMetricValue"] {font-size: 28px; font-weight: 700; color: #fff;}
+    h1, h2, h3 {color: #ffffff !important; font-weight: 700 !important;}
+    .stTabs [data-baseweb="tab-list"] {gap: 8px; background-color: rgba(255,255,255,0.1); border-radius: 10px; padding: 5px;}
+    .stTabs [data-baseweb="tab"] {background-color: rgba(255,255,255,0.1); border-radius: 8px; color: white; padding: 12px 24px; font-weight: 600;}
+    .stTabs [aria-selected="true"] {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);}
+    .stButton>button {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; padding: 12px 24px; font-weight: 600;}
+    .metric-card {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); text-align: center; color: white;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -209,20 +131,12 @@ sns.set_palette("husl")
 # ============================================================================
 
 if page == "🏠 Dashboard":
-<div style='text-align: center; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; margin-bottom: 30px;'>
-    <h1 style='font-size: 48px; color: white; margin: 0;'>🎬 Hollywood Movies Analytics</h1>
-    <p style='color: rgba(255,255,255,0.9); font-size: 20px; margin: 10px 0 0 0;'>Advanced Statistical Analysis & Prediction System</p>
-    <p style='color: rgba(255,255,255,0.7); font-size: 14px;'>Probability & Statistics | Spring 2026</p>
-</div>
-
-# Dashboard Header
-st.markdown("""
-<div style='text-align: center; padding: 30px; background: linear-gradient(135deg, #1a0000 0%, #4d0000 100%); border-radius: 20px; margin-bottom: 30px; border: 3px solid #ff4444; box-shadow: 0 0 40px rgba(255, 68, 68, 0.4);'>
-    <h1 style='font-size: 48px; background: linear-gradient(90deg, #ff4444 0%, #ff6b35 50%, #ffa500 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; filter: drop-shadow(0 0 25px rgba(255, 68, 68, 0.6));'>🎬 Hollywood Movies Analytics</h1>
-    <p style='color: #ff6b35; font-size: 20px; margin: 10px 0 0 0; font-weight: 600;'>Advanced Statistical Analysis & Prediction System</p>
-    <p style='color: #cc9999; font-size: 14px;'>Probability & Statistics | Spring 2026</p>
-</div>
-""", unsafe_allow_html=True)
+    st.markdown("""
+    <div style='text-align: center; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; margin-bottom: 30px;'>
+        <h1 style='font-size: 48px; color: white; margin: 0;'>🎬 Hollywood Movies Analytics</h1>
+        <p style='color: rgba(255,255,255,0.9); font-size: 20px; margin: 10px 0 0 0;'>Advanced Statistical Analysis & Prediction System</p>
+        <p style='color: rgba(255,255,255,0.7); font-size: 14px;'>Probability & Statistics | Spring 2026</p>
+    </div>
     """, unsafe_allow_html=True)
     
     st.markdown("### 📊 Key Performance Indicators")
@@ -1477,10 +1391,10 @@ elif page == "ℹ️ About Project":
     
     **Variables Include:**
     - Movie titles and metadata
-    - Financial data (budget, revenue, profitability)
-    - Ratings (audience scores, critics scores)
-    - Categorical information (genre, studio)
-    - Temporal data (release year)
+    - Data (languages, ratings)
+    - Ratings (audience votes)
+    - Information (Popularity)
+  
     
     ## 🛠️ Technologies Used
     
