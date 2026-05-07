@@ -1391,10 +1391,10 @@ elif page == "ℹ️ About Project":
     
     **Variables Include:**
     - Movie titles and metadata
-    - Data (languages, ratings)
-    - Ratings (audience votes)
-    - Information (Popularity)
-  
+    - Financial data (budget, revenue, profitability)
+    - Ratings (audience scores, critics scores)
+    - Categorical information (genre, studio, language)
+    - Temporal data (release year)
     
     ## 🛠️ Technologies Used
     
@@ -1406,40 +1406,62 @@ elif page == "ℹ️ About Project":
     - **Machine Learning:** Scikit-learn
     
     ## 📈 Statistical Methods Implemented
+    """)
     
-    | Method | Application | Purpose |
-    |--------|-------------|---------|
-    | **Descriptive Statistics** | Summary measures | Understand data distribution |
-    | **Confidence Intervals** | Parameter estimation | Estimate population parameters |
-    | **Normal Distribution** | Probability modeling | Calculate probabilities |
-    | **Binomial Distribution** | Success/failure events | Model binary outcomes |
-    | **Linear Regression** | Prediction | Forecast movie performance |
-    | **Correlation Analysis** | Relationship detection | Find variable associations |
+    # Methods table as DataFrame (avoids markdown table issues)
+    methods_df = pd.DataFrame({
+        'Method': [
+            'Descriptive Statistics',
+            'Confidence Intervals',
+            'Normal Distribution',
+            'Binomial Distribution',
+            'Linear Regression',
+            'Correlation Analysis'
+        ],
+        'Application': [
+            'Summary measures',
+            'Parameter estimation',
+            'Probability modeling',
+            'Success/failure events',
+            'Prediction',
+            'Relationship detection'
+        ],
+        'Purpose': [
+            'Understand data distribution',
+            'Estimate population parameters',
+            'Calculate probabilities',
+            'Model binary outcomes',
+            'Forecast movie performance',
+            'Find variable associations'
+        ]
+    })
     
-    ## 👥 Development Team
+    st.dataframe(methods_df, use_container_width=True, hide_index=True)
     
-    **Team Name:** [Data Detectives]
+    st.markdown("---")
     
-  st.markdown
-  ("""
-("""
-**Team Name:** Data Detectives
-
-| No | Roll Number | Name | Department | Section |
-|---|-------------|------|------------|---------|
-| 1 | 24F-0731 | Muhammad Waleed | Computer Science | BSCS-4D |
-| 2 | 24F-0717 | Muhammad Mughees | Computer Science | BSCS-4D |
-| 3 | 24F-0552 | Faraz Ahmed | Computer Science | BSCS-4D |
-| 4 | 24F-3050 | Ibadat Ali | Software Engineering | BSSE-4A |
-| 5 | 24F-3113 | Muhammad Adil | Software Engineering | BSSE-4B |
-""")
+    # Team section
+    st.markdown("## 👥 Development Team")
+    st.markdown("**Team Name:** Data Detectives")
     
+    # Team members as DataFrame (perfect alignment)
+    team_df = pd.DataFrame({
+        '#': [1, 2, 3, 4, 5],
+        'Roll Number': ['24F-0731', '24F-0717', '24F-0552', '24F-3050', '24F-3113'],
+        'Name': ['Muhammad Waleed', 'Muhammad Mughees', 'Faraz Ahmed', 'Ibadat Ali', 'Muhammad Adil'],
+        'Department': ['Computer Science', 'Computer Science', 'Computer Science', 'Software Engineering', 'Software Engineering'],
+        'Section': ['BSCS-4D', 'BSCS-4D', 'BSCS-4D', 'BSSE-4A', 'BSSE-4B']
+    })
+    
+    st.dataframe(team_df, use_container_width=True, hide_index=True)
+    
+    st.markdown("""
     ## 📅 Project Details
     
     - **Course:** Probability and Statistics
     - **Semester:** Spring 2026
     - **Submission Deadline:** May 7, 2026
-    - **Institution:** [Your University Name]
+    - **Institution:** FAST-NUCES Karachi
     - **Instructor:** [Instructor Name]
     
     ## 🎓 Learning Outcomes
@@ -1470,12 +1492,14 @@ elif page == "ℹ️ About Project":
     - [Streamlit Documentation](https://docs.streamlit.io)
     - [Pandas Documentation](https://pandas.pydata.org)
     - [Scikit-learn Documentation](https://scikit-learn.org)
+    """)
     
+    st.markdown("""
     ---
     
-    <div style='text-align: center; padding: 20px; background-color: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 30px;'>
-        <p style='color: white; font-size: 16px; margin: 0;'>Made with ❤️ using Python & Streamlit</p>
-        <p style='color: rgba(255,255,255,0.7); font-size: 12px; margin: 10px 0 0 0;'>© 2026 Hollywood Analytics Team</p>
+    <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 10px; margin-top: 30px; border: 2px solid rgba(102, 126, 234, 0.3);'>
+        <p style='color: white; font-size: 16px; margin: 0; font-weight: 600;'>Made with ❤️ using Python & Streamlit</p>
+        <p style='color: rgba(255,255,255,0.7); font-size: 12px; margin: 10px 0 0 0;'>© 2026 Data Detectives - FAST NUCES Karachi</p>
     </div>
     """, unsafe_allow_html=True)
 
