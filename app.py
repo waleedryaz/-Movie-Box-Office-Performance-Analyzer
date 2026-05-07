@@ -1611,11 +1611,11 @@ elif page == "ℹ️ About Project":
     st.markdown("""
     ## 📅 Project Details
     
-    - **Course:** Probability and Statistics
+    - **Course:** Probability
     - **Semester:** Spring 2026
     - **Submission Deadline:** May 7, 2026
-    - **Institution:** FAST-NUCES Karachi
-    - **Instructor:** [Instructor Name]
+    - **Institution:** FAST-NUCES Faislabad
+    - **Instructor:** [Muhammad Munawar]
     
     ## 🎓 Learning Outcomes
     
