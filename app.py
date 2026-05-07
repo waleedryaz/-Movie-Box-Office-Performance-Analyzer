@@ -347,169 +347,322 @@ elif page == "📊 Data Explorer":
 # ============================================================================
 # VISUAL ANALYTICS (Keeping previous implementation)
 # ============================================================================
+# VISUAL ANALYTICS
+# ============================================================================
 
 elif page == "📈 Visual Analytics":
-    st.markdown("# 📈 Advanced Visual Analytics")
+    st.markdown("# 📈 Advanced Visual Analytics Dashboard")
     
     if len(filtered_numeric_cols) == 0:
-        st.warning("⚠️ No numeric columns available")
+        st.error("❌ No numeric columns available for visualization")
         st.stop()
     
+    # Create tabs
     tab1, tab2, tab3, tab4 = st.tabs(["📊 Distributions", "📦 Comparisons", "🔵 Relationships", "🔥 Correlations"])
     
+    # ========== TAB 1: DISTRIBUTIONS ==========
     with tab1:
-        st.markdown("### Distribution Analysis")
+        st.markdown("### 📊 Distribution Analysis with Statistics")
         
-        col = st.selectbox("Select Variable", filtered_numeric_cols, key='dist')
+        col = st.selectbox("Select Variable for Analysis", filtered_numeric_cols, key='dist')
         data = filtered_df[col].dropna()
         
-        col1, col2 = st.columns([2, 1])
-        
-        with col1:
-            fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10), facecolor='white')
+        if len(data) < 3:
+            st.error("Not enough data points for analysis")
+        else:
+            col1, col2 = st.columns([2.5, 1.2])
             
-            ax1.hist(data, bins=30, color='#667eea', alpha=0.7, edgecolor='black', density=True)
+            # Left side - Visualizations
+            with col1:
+                fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(11, 9), facecolor='white')
+                fig.patch.set_facecolor('white')
+                
+                # Histogram with KDE
+                ax1.hist(data, bins=30, color='#667eea', alpha=0.7, edgecolor='black', 
+                        linewidth=1.5, density=True, label='Data Distribution')
+                
+                from scipy.stats import gaussian_kde
+                kde = gaussian_kde(data)
+                x_range = np.linspace(data.min(), data.max(), 200)
+                ax1.plot(x_range, kde(x_range), color='#ff4444', linewidth=3, label='KDE Curve')
+                
+                # Add mean and median lines
+                ax1.axvline(data.mean(), color='green', linestyle='--', linewidth=2.5, label=f'Mean: {data.mean():.2f}')
+                ax1.axvline(data.median(), color='orange', linestyle='--', linewidth=2.5, label=f'Median: {data.median():.2f}')
+                
+                ax1.set_xlabel(col, fontsize=13, fontweight='bold')
+                ax1.set_ylabel('Probability Density', fontsize=13, fontweight='bold')
+                ax1.set_title(f'Distribution Analysis: {col}', fontsize=15, fontweight='bold', pad=15)
+                ax1.legend(loc='upper right', fontsize=11, framealpha=0.95)
+                ax1.grid(alpha=0.3, linestyle='--')
+                ax1.set_facecolor('#f9f9f9')
+                
+                # Box plot
+                bp = ax2.boxplot([data], vert=False, patch_artist=True, widths=0.6,
+                                boxprops=dict(facecolor='#764ba2', alpha=0.8, linewidth=2),
+                                medianprops=dict(color='red', linewidth=2.5),
+                                whiskerprops=dict(linewidth=1.5),
+                                capprops=dict(linewidth=1.5))
+                
+                ax2.set_xlabel(col, fontsize=13, fontweight='bold')
+                ax2.set_title('Box Plot with Outliers', fontsize=15, fontweight='bold', pad=15)
+                ax2.grid(alpha=0.3, axis='x', linestyle='--')
+                ax2.set_facecolor('#f9f9f9')
+                ax2.set_yticklabels([])
+                
+                plt.tight_layout()
+                st.pyplot(fig, use_container_width=True)
             
-            from scipy.stats import gaussian_kde
-            kde = gaussian_kde(data)
-            x_range = np.linspace(data.min(), data.max(), 200)
-            ax1.plot(x_range, kde(x_range), 'r-', linewidth=2, label='KDE')
-            
-            ax1.set_xlabel(col, fontsize=12, fontweight='bold')
-            ax1.set_ylabel('Density', fontsize=12, fontweight='bold')
-            ax1.set_title(f'Distribution of {col}', fontsize=14, fontweight='bold', pad=20)
-            ax1.legend()
-            ax1.grid(alpha=0.3)
-            
-            bp = ax2.boxplot([data], vert=False, patch_artist=True, widths=0.5)
-            bp['boxes'][0].set_facecolor('#764ba2')
-            bp['boxes'][0].set_alpha(0.7)
-            
-            ax2.set_xlabel(col, fontsize=12, fontweight='bold')
-            ax2.set_title('Box Plot', fontsize=14, fontweight='bold', pad=20)
-            ax2.grid(alpha=0.3)
-            
-            plt.tight_layout()
-            st.pyplot(fig)
-        
-        with col2:
-            st.markdown("#### 📊 Stats")
-            st.metric("Mean", f"{data.mean():.2f}")
-            st.metric("Median", f"{data.median():.2f}")
-            st.metric("Std Dev", f"{data.std():.2f}")
-            st.metric("Min", f"{data.min():.2f}")
-            st.metric("Max", f"{data.max():.2f}")
-            st.metric("Count", f"{len(data):,}")
+            # Right side - Statistics
+            with col2:
+                st.markdown("#### 📊 Statistical Summary")
+                
+                # Main stats
+                st.metric("📈 Mean", f"{data.mean():.3f}")
+                st.metric("📉 Median", f"{data.median():.3f}")
+                st.metric("🔢 Mode", f"{data.mode().iloc[0]:.3f}" if len(data.mode()) > 0 else "N/A")
+                st.metric("📏 Std Dev", f"{data.std():.3f}")
+                st.metric("📐 Variance", f"{data.var():.3f}")
+                st.metric("⬇️ Min", f"{data.min():.3f}")
+                st.metric("⬆️ Max", f"{data.max():.3f}")
+                st.metric("📊 Range", f"{data.max() - data.min():.3f}")
+                st.metric("🔀 Count", f"{len(data):,}")
+                st.metric("📈 Skewness", f"{data.skew():.3f}")
     
+    # ========== TAB 2: COMPARISONS ==========
     with tab2:
-        st.markdown("### Genre Comparison")
+        st.markdown("### 📦 Genre-wise Performance Comparison")
         
         if not genre_col:
-            st.info("No genre column found")
+            st.info("ℹ️ No genre column found for comparison")
         else:
-            col = st.selectbox("Select Metric", filtered_numeric_cols, key='comp')
+            col = st.selectbox("Select Performance Metric", filtered_numeric_cols, key='comp')
             
-            genre_stats = filtered_df.groupby(genre_col)[col].agg(['mean', 'std']).reset_index()
+            # Calculate genre statistics
+            genre_stats = filtered_df.groupby(genre_col)[col].agg(['mean', 'median', 'std', 'count']).reset_index()
             genre_stats = genre_stats.sort_values('mean', ascending=False).head(10)
             
-            fig, ax = plt.subplots(figsize=(12, 6), facecolor='white')
+            # Create visualization
+            fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6), facecolor='white')
             
+            # Bar chart with error bars
             x_pos = np.arange(len(genre_stats))
-            colors = plt.cm.viridis(np.linspace(0, 1, len(genre_stats)))
+            colors = plt.cm.Set2(np.linspace(0, 1, len(genre_stats)))
             
-            bars = ax.bar(x_pos, genre_stats['mean'], yerr=genre_stats['std'], 
-                          color=colors, alpha=0.7, edgecolor='black', linewidth=1.5)
+            bars = ax1.bar(x_pos, genre_stats['mean'], 
+                          yerr=genre_stats['std'],
+                          color=colors, alpha=0.8, edgecolor='black', linewidth=1.5,
+                          error_kw={'linewidth': 2, 'ecolor': '#ff4444', 'elinewidth': 2})
             
-            ax.set_xticks(x_pos)
-            ax.set_xticklabels(genre_stats[genre_col], rotation=45, ha='right')
-            ax.set_ylabel(f'Average {col}', fontsize=12, fontweight='bold')
-            ax.set_title(f'Mean {col} by Genre', fontsize=14, fontweight='bold', pad=20)
-            ax.grid(axis='y', alpha=0.3)
+            # Customize bar chart
+            ax1.set_xticks(x_pos)
+            ax1.set_xticklabels(genre_stats[genre_col], rotation=45, ha='right', fontsize=11, fontweight='600')
+            ax1.set_ylabel(f'Average {col}', fontsize=13, fontweight='bold')
+            ax1.set_title(f'Mean {col} by Genre (with Std Dev)', fontsize=14, fontweight='bold', pad=15)
+            ax1.grid(axis='y', alpha=0.3, linestyle='--')
+            ax1.set_facecolor('#f9f9f9')
             
+            # Add value labels on bars
             for bar, val in zip(bars, genre_stats['mean']):
                 height = bar.get_height()
-                ax.text(bar.get_x() + bar.get_width()/2., height,
-                        f'{val:.1f}', ha='center', va='bottom', fontweight='bold')
+                ax1.text(bar.get_x() + bar.get_width()/2., height,
+                        f'{val:.1f}', ha='center', va='bottom', fontweight='bold', fontsize=10)
+            
+            # Box plot comparison
+            data_by_genre = [filtered_df[filtered_df[genre_col] == g][col].dropna() 
+                           for g in genre_stats[genre_col]]
+            
+            bp = ax2.boxplot(data_by_genre, labels=genre_stats[genre_col], patch_artist=True,
+                           boxprops=dict(linewidth=1.5),
+                           medianprops=dict(color='red', linewidth=2.5),
+                           whiskerprops=dict(linewidth=1.5),
+                           capprops=dict(linewidth=1.5))
+            
+            for patch, color in zip(bp['boxes'], colors):
+                patch.set_facecolor(color)
+                patch.set_alpha(0.8)
+            
+            ax2.set_xticklabels(genre_stats[genre_col], rotation=45, ha='right', fontsize=11, fontweight='600')
+            ax2.set_ylabel(col, fontsize=13, fontweight='bold')
+            ax2.set_title(f'Distribution of {col} by Genre', fontsize=14, fontweight='bold', pad=15)
+            ax2.grid(axis='y', alpha=0.3, linestyle='--')
+            ax2.set_facecolor('#f9f9f9')
             
             plt.tight_layout()
-            st.pyplot(fig)
+            st.pyplot(fig, use_container_width=True)
+            
+            # Show statistics table
+            st.markdown("#### 📊 Genre Statistics Table")
+            display_stats = genre_stats[[genre_col, 'mean', 'median', 'std', 'count']].copy()
+            display_stats.columns = ['Genre', 'Mean', 'Median', 'Std Dev', 'Count']
+            display_stats = display_stats.round(3)
+            st.dataframe(display_stats, use_container_width=True, hide_index=True)
     
+    # ========== TAB 3: RELATIONSHIPS ==========
     with tab3:
-        st.markdown("### Relationship Analysis")
+        st.markdown("### 🔵 Relationship & Correlation Analysis")
         
         if len(filtered_numeric_cols) < 2:
-            st.warning("Need at least 2 numeric columns")
+            st.warning("⚠️ Need at least 2 numeric columns")
         else:
             col1, col2 = st.columns(2)
             
             with col1:
-                x_var = st.selectbox("X Variable", filtered_numeric_cols, key='x_rel')
+                x_var = st.selectbox("📊 X-Axis Variable", filtered_numeric_cols, key='x_rel')
             with col2:
-                y_var = st.selectbox("Y Variable", filtered_numeric_cols, 
+                y_var = st.selectbox("📈 Y-Axis Variable", filtered_numeric_cols, 
                                    index=min(1, len(filtered_numeric_cols)-1), key='y_rel')
             
-            scatter_data = filtered_df[[x_var, y_var]].dropna()
-            
-            if len(scatter_data) > 0:
-                correlation = scatter_data[x_var].corr(scatter_data[y_var])
+            if x_var == y_var:
+                st.warning("⚠️ Please select different variables for X and Y axes")
+            else:
+                scatter_data = filtered_df[[x_var, y_var]].dropna()
                 
-                fig, ax = plt.subplots(figsize=(10, 6), facecolor='white')
-                
-                ax.scatter(scatter_data[x_var], scatter_data[y_var],
-                          alpha=0.6, s=80, c=scatter_data[y_var],
-                          cmap='viridis', edgecolors='black', linewidth=0.5)
-                
-                z = np.polyfit(scatter_data[x_var], scatter_data[y_var], 1)
-                p = np.poly1d(z)
-                ax.plot(scatter_data[x_var].sort_values(), 
-                       p(scatter_data[x_var].sort_values()),
-                       "r--", linewidth=2, label=f'r={correlation:.3f}')
-                
-                ax.set_xlabel(x_var, fontsize=12, fontweight='bold')
-                ax.set_ylabel(y_var, fontsize=12, fontweight='bold')
-                ax.set_title(f'{x_var} vs {y_var}', fontsize=14, fontweight='bold', pad=20)
-                ax.legend()
-                ax.grid(alpha=0.3)
-                
-                plt.tight_layout()
-                st.pyplot(fig)
-                
-                if abs(correlation) > 0.7:
-                    st.success(f"🔥 **Strong correlation** detected (r = {correlation:.3f})")
-                elif abs(correlation) > 0.4:
-                    st.info(f"📊 **Moderate correlation** detected (r = {correlation:.3f})")
-                else:
-                    st.warning(f"📉 **Weak correlation** detected (r = {correlation:.3f})")
+                if len(scatter_data) > 1:
+                    correlation = scatter_data[x_var].corr(scatter_data[y_var])
+                    
+                    fig, ax = plt.subplots(figsize=(12, 7), facecolor='white')
+                    
+                    # Create scatter plot with gradient colors
+                    scatter = ax.scatter(scatter_data[x_var], scatter_data[y_var],
+                                       alpha=0.6, s=100, c=scatter_data[y_var],
+                                       cmap='viridis', edgecolors='black', linewidth=0.7)
+                    
+                    # Add regression line
+                    z = np.polyfit(scatter_data[x_var], scatter_data[y_var], 1)
+                    p = np.poly1d(z)
+                    x_line = np.linspace(scatter_data[x_var].min(), scatter_data[x_var].max(), 100)
+                    ax.plot(x_line, p(x_line), "r-", linewidth=3, label=f'Regression Line')
+                    
+                    # Customize plot
+                    ax.set_xlabel(x_var, fontsize=13, fontweight='bold')
+                    ax.set_ylabel(y_var, fontsize=13, fontweight='bold')
+                    ax.set_title(f'Relationship: {x_var} vs {y_var} (r = {correlation:.4f})', 
+                               fontsize=15, fontweight='bold', pad=15)
+                    ax.grid(alpha=0.3, linestyle='--')
+                    ax.set_facecolor('#f9f9f9')
+                    ax.legend(fontsize=11)
+                    
+                    # Add colorbar
+                    cbar = plt.colorbar(scatter, ax=ax)
+                    cbar.set_label(y_var, fontweight='bold')
+                    
+                    plt.tight_layout()
+                    st.pyplot(fig, use_container_width=True)
+                    
+                    # Correlation interpretation
+                    st.markdown("---")
+                    st.markdown("#### 📊 Correlation Interpretation")
+                    
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.metric("Correlation (r)", f"{correlation:.4f}")
+                    
+                    with col2:
+                        st.metric("Sample Size", f"{len(scatter_data):,}")
+                    
+                    with col3:
+                        r_squared = correlation ** 2
+                        st.metric("R² Value", f"{r_squared:.4f}")
+                    
+                    # Correlation strength
+                    abs_corr = abs(correlation)
+                    if abs_corr > 0.8:
+                        st.success(f"🔥 **Very Strong {'Positive' if correlation > 0 else 'Negative'} Correlation** (|r| = {abs_corr:.3f})")
+                    elif abs_corr > 0.6:
+                        st.success(f"💪 **Strong {'Positive' if correlation > 0 else 'Negative'} Correlation** (|r| = {abs_corr:.3f})")
+                    elif abs_corr > 0.4:
+                        st.info(f"📊 **Moderate {'Positive' if correlation > 0 else 'Negative'} Correlation** (|r| = {abs_corr:.3f})")
+                    elif abs_corr > 0.2:
+                        st.warning(f"📉 **Weak {'Positive' if correlation > 0 else 'Negative'} Correlation** (|r| = {abs_corr:.3f})")
+                    else:
+                        st.warning(f"❌ **Very Weak/No Correlation** (|r| = {abs_corr:.3f})")
+                    
+                    st.markdown(f"""
+                    **Interpretation:**
+                    - **Correlation Coefficient:** {correlation:.4f}
+                    - **R-Squared (R²):** {r_squared:.4f} (explains {r_squared*100:.2f}% of variance)
+                    - **Direction:** {'Positive' if correlation > 0 else 'Negative'} relationship
+                    - **Strength:** {'Very Strong' if abs_corr > 0.8 else 'Strong' if abs_corr > 0.6 else 'Moderate' if abs_corr > 0.4 else 'Weak' if abs_corr > 0.2 else 'Very Weak'}
+                    """)
     
+    # ========== TAB 4: CORRELATION MATRIX ==========
     with tab4:
-        st.markdown("### Correlation Matrix")
+        st.markdown("### 🔥 Correlation Matrix & Heatmap")
         
         if len(filtered_numeric_cols) < 2:
-            st.warning("Need at least 2 numeric columns")
+            st.warning("⚠️ Need at least 2 numeric columns")
         else:
             corr_data = filtered_df[filtered_numeric_cols].dropna()
-            corr = corr_data.corr()
             
-            fig, ax = plt.subplots(figsize=(10, 8), facecolor='white')
-            
-            im = ax.imshow(corr, cmap='RdBu_r', aspect='auto', vmin=-1, vmax=1)
-            
-            ax.set_xticks(np.arange(len(corr.columns)))
-            ax.set_yticks(np.arange(len(corr.columns)))
-            ax.set_xticklabels(corr.columns, rotation=45, ha='right')
-            ax.set_yticklabels(corr.columns)
-            
-            for i in range(len(corr.columns)):
-                for j in range(len(corr.columns)):
-                    value = corr.iloc[i, j]
-                    color = 'white' if abs(value) > 0.5 else 'black'
-                    ax.text(j, i, f'{value:.2f}', ha="center", va="center", 
-                           color=color, fontsize=9, fontweight='bold')
-            
-            ax.set_title('Correlation Heatmap', fontsize=14, fontweight='bold', pad=20)
-            plt.colorbar(im, ax=ax)
-            plt.tight_layout()
-            st.pyplot(fig)
+            if len(corr_data) > 1:
+                corr = corr_data.corr()
+                
+                # Create heatmap
+                fig, ax = plt.subplots(figsize=(12, 10), facecolor='white')
+                
+                im = ax.imshow(corr, cmap='RdBu_r', aspect='auto', vmin=-1, vmax=1)
+                
+                # Set ticks and labels
+                ax.set_xticks(np.arange(len(corr.columns)))
+                ax.set_yticks(np.arange(len(corr.columns)))
+                ax.set_xticklabels(corr.columns, rotation=45, ha='right', fontsize=11, fontweight='600')
+                ax.set_yticklabels(corr.columns, fontsize=11, fontweight='600')
+                
+                # Add correlation values with color coding
+                for i in range(len(corr.columns)):
+                    for j in range(len(corr.columns)):
+                        value = corr.iloc[i, j]
+                        # Color text based on correlation strength
+                        if abs(value) > 0.7:
+                            color = 'white'
+                        elif abs(value) > 0.5:
+                            color = 'white'
+                        else:
+                            color = 'black'
+                        
+                        ax.text(j, i, f'{value:.2f}', ha="center", va="center", 
+                               color=color, fontsize=10, fontweight='bold')
+                
+                ax.set_title('Correlation Matrix Heatmap', fontsize=16, fontweight='bold', pad=20)
+                
+                # Add colorbar
+                cbar = plt.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+                cbar.set_label('Correlation Coefficient', rotation=270, labelpad=25, fontweight='bold')
+                
+                plt.tight_layout()
+                st.pyplot(fig, use_container_width=True)
+                
+                # Display correlation data table
+                st.markdown("#### 📊 Correlation Matrix Table")
+                
+                corr_display = corr.round(3)
+                st.dataframe(corr_display.style.background_gradient(cmap='RdBu_r', vmin=-1, vmax=1), 
+                           use_container_width=True)
+                
+                # Key insights
+                st.markdown("---")
+                st.markdown("#### 🔍 Key Insights")
+                
+                # Find strongest correlations
+                corr_unstacked = corr.unstack()
+                corr_unstacked = corr_unstacked[corr_unstacked != 1.0]  # Remove self-correlations
+                strongest = corr_unstacked.abs().nlargest(5)
+                
+                st.write("**Top 5 Strongest Correlations:**")
+                for idx, (pair, value) in enumerate(strongest.items(), 1):
+                    var1, var2 = pair
+                    actual_corr = corr.loc[var1, var2]
+                    st.write(f"{idx}. **{var1}** ↔ **{var2}**: {actual_corr:.4f}")
+                
+                st.info("""
+                **How to interpret the heatmap:**
+                - **Red colors:** Strong positive correlation (both increase together)
+                - **Blue colors:** Strong negative correlation (one increases, other decreases)
+                - **White/Light colors:** Weak or no correlation
+                - **Diagonal (all 1.0):** Perfect correlation with itself
+                """)
 
 # ============================================================================
 # STATISTICS LAB
