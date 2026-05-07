@@ -17,18 +17,103 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Beautiful CSS
 st.markdown("""
 <style>
-    .main {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);}
-    [data-testid="stSidebar"] {background: linear-gradient(180deg, #1e1e2e 0%, #2d2d44 100%);}
-    [data-testid="stMetricValue"] {font-size: 28px; font-weight: 700; color: #fff;}
-    h1, h2, h3 {color: #ffffff !important; font-weight: 700 !important;}
-    .stTabs [data-baseweb="tab-list"] {gap: 8px; background-color: rgba(255,255,255,0.1); border-radius: 10px; padding: 5px;}
-    .stTabs [data-baseweb="tab"] {background-color: rgba(255,255,255,0.1); border-radius: 8px; color: white; padding: 12px 24px; font-weight: 600;}
-    .stTabs [aria-selected="true"] {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);}
-    .stButton>button {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; padding: 12px 24px; font-weight: 600;}
-    .metric-card {background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); text-align: center; color: white;}
+    /* Main background - Black with gold accent */
+    .main {
+        background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2d2d2d 100%);
+    }
+    
+    /* Sidebar - Dark with gold trim */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
+        border-right: 3px solid #FFD700;
+    }
+    
+    /* Metrics */
+    [data-testid="stMetricValue"] {
+        font-size: 28px;
+        font-weight: 700;
+        color: #FFD700;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    [data-testid="stMetricLabel"] {
+        color: #b8b8b8;
+        font-weight: 600;
+    }
+    
+    /* Headers with golden glow */
+    h1 {
+        color: #FFD700 !important;
+        font-weight: 800 !important;
+        text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+    
+    h2, h3 {
+        color: #FFA500 !important;
+        font-weight: 700 !important;
+        text-shadow: 0 0 10px rgba(255, 165, 0, 0.2);
+    }
+    
+    /* Tabs - Golden accent */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 15px;
+        padding: 8px;
+        border: 2px solid rgba(255, 215, 0, 0.3);
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+        border-radius: 10px;
+        color: #FFD700;
+        padding: 12px 24px;
+        font-weight: 600;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        color: #000000;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    }
+    
+    /* Buttons - Premium gold */
+    .stButton>button {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        color: #000000;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 28px;
+        font-weight: 700;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .stButton>button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+    }
+    
+    /* Metric cards - Black with gold border */
+    .metric-card {
+        background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        text-align: center;
+        border: 2px solid #FFD700;
+    }
+    
+    /* Info/Success boxes */
+    .stAlert {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.1) 100%);
+        border-left: 4px solid #FFD700;
+        border-radius: 10px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
